@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+
+<p>
+  <strong>Images:</strong>
+  <%= image_tag(@post.images, size:"200x200") %>
+</p>
+
+<p>
+  <strong>Love:</strong>
+  <%= @post.love %>
+</p>
+
+<div class="interact">
+  <ul class="listInteract">
+    <li><i class="fa fa-heart" style="color: #e80b0b"></i></li>
+    <li><i class="fa fa-share"></i></li>
+  </ul>
+</div>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
