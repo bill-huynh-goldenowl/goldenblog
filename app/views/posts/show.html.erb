@@ -27,5 +27,7 @@
   </ul>
 </div>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
+<% if current_user && current_user.id == @post.user_id %>
+  <%= link_to 'Edit', edit_post_path(@post) %> |
+<% end %>
 <%= link_to 'Back', posts_path %>
