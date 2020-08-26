@@ -4,7 +4,11 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    if current_user && current_user.admin
+      @categories = Category.all
+    else
+      redirect_to root_path, warning: "You are not authorized"
+    end
   end
 
   # GET /categories/1

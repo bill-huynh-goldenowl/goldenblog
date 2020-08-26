@@ -1,12 +1,13 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   @@object_after_convert = {}
 
   # GET /posts
   # GET /posts.json
   def index
-    if current_user.admin
+
+    if !current_user || current_user.admin
       @posts = Post.all
     else
       @user = User.find(current_user.id)
@@ -22,17 +23,18 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
+    @categories = Category.all
     @post = Post.new
   end
 
   # GET /posts/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /posts
   # POST /posts.json
   def create
-    
     if post_params[:images].blank?
       flash[:error] = "Please, choose image"
       return
@@ -52,6 +54,10 @@ class PostsController < ApplicationController
     end
 
     @post = @user.posts.new(post_params.merge(images: @url_image))
+    # get specific category
+    @category = Category.find(params[:category_id])
+    # add post to category
+    @category.posts << @post
 
     respond_to do |format|
       if @post.save
