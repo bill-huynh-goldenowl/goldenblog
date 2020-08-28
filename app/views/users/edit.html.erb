@@ -1,0 +1,21 @@
+<% flash.each do |type, msg| %>
+<div style="color: green">
+  <%= msg %>
+</div>
+<% end %>
+<%= form_with model: @user, url:"/users/update" do |form| %>
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field(:last_name) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
