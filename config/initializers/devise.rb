@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'ee90e42a289ae5e54e555ceacc31a771516f59a95359250caa35541882b8829ba171c01c9825ba840a8a97776eaf7e8dfa89bd0dda38555d678b1bf5f0c4b657'
+  # config.secret_key = '942e6b1531e727a8180e228d94fa1b2c6391d3141d7cf84fa64a39779bcc3475c6ecb6b4a17d6666c21814115100c589a9cd9f6b1c747c78c95fd5f2fc8ddaa1'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -24,7 +24,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'huynhthetong1999999@gmail.com'
+  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'f98f0c6b2c1becce4a3e5af7f50a510c97e1668ff2e7c5385880f4cb11388fa81893ee0b78b0e9eb7770be249ef4a37b3ed0ef09921be01ea375d9b062316918'
+  # config.pepper = '52f6561ee94e91a2bbfa1e9fefef82f23aa854400f0ebc8ed653f7e4a1fb12ae79ae1099c944d338fb8a9a608969d149dfe9f1c90e2e530cce2fae704973b8c3'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -308,5 +308,4 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
-  config.omniauth :facebook, "3020200234755482", "ff6e816132cd4fca9c1bbaaa76eb463c", scope: 'email', info_fields: 'email,name'
 end
