@@ -1,60 +1,59 @@
 <div class="container">
-	<div class="d-flex justify-content-center h-100">
-		<div class="card" style="min-height: 280px">
-			<div class="card-header">
-				<h3><%= link_to  "New password", new_user_session_path %></h3>
-				<div class="d-flex justify-content-end social_icon">
+  <div class="d-flex justify-content-center h-100">
+    <div class="card" style="min-height: 280px">
+      <div class="card-header">
+        <h3><%= link_to  "New password", new_user_session_path %></h3>
+        <div class="d-flex justify-content-end social_icon">
           <%- if devise_mapping.omniauthable? %>
-            <%- resource_class.omniauth_providers.each do |provider| %>
-							<% if provider.to_s == "facebook" %>
-									<span>
-										<%= link_to omniauth_authorize_path(resource_name, provider) do %>
-											<i class="fab fa-facebook-square"></i>
-										<%end%>
-									</span>
-							<% end %>
-
-							<% if provider.to_s == "google_oauth2" %>
-								<span>
-										<%= link_to omniauth_authorize_path(resource_name, provider) do %>
-											<i class="fab fa-google-plus-square"></i>
-										<%end%>
-									</span>
-							<% end %>
-            <% end %>
+          <%- resource_class.omniauth_providers.each do |provider| %>
+          <% if provider.to_s == "facebook" %>
+          <span>
+            <%= link_to omniauth_authorize_path(resource_name, provider) do %>
+            <i class="fab fa-facebook-square"></i>
+            <%end%>
+          </span>
           <% end %>
-				</div>
-			</div>
-			<div class="card-body">
-      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put })  do |f| %>
-					<%= render "devise/shared/error_messages", resource: resource %>
-          <%= f.hidden_field :reset_password_token %>
 
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-            <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "New password" %>
-					</div>
-          <div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-            <%= f.password_field :password_confirmation, autocomplete: "confirm-password",class: "form-control", placeholder: "Confirm password" %>
-					</div>
-          
-					<div class="form-group">
-            <%= f.submit "Reset", class: "btn float-right login_btn"  %>
-					</div>
-      <% end %>
-			</div>
-      	<div class="card-footer">
-				<div class="d-flex justify-content-center links">
-					Don't have an account?
+          <% if provider.to_s == "google_oauth2" %>
+          <span>
+            <%= link_to omniauth_authorize_path(resource_name, provider) do %>
+            <i class="fab fa-google-plus-square"></i>
+            <%end%>
+          </span>
+          <% end %>
+          <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="card-body">
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put })  do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <%= f.hidden_field :reset_password_token %>
+
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-key"></i></span>
+          </div>
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "New password" %>
+        </div>
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-key"></i></span>
+          </div>
+          <%= f.password_field :password_confirmation, autocomplete: "confirm-password",class: "form-control", placeholder: "Confirm password" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit "Reset", class: "btn float-right login_btn"  %>
+        </div>
+        <% end %>
+      </div>
+      <div class="card-footer">
+        <div class="d-flex justify-content-center links">
+          Don't have an account?
           <%= link_to 'Sign Up', new_user_registration_path %>
-				</div>
-			</div>
-		</div>
-	</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
