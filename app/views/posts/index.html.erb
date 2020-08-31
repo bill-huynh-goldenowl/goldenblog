@@ -1,0 +1,86 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Posts</h1>
+<div class="container-table" style="background: #f1f1f1;
+padding: 20px;">
+  <table style="margin:0 auto">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Images</th>
+        <th>Love</th>
+        <th>Share</th>
+        <th>User</th>
+        <th colspan="3">Action</th>
+        <% if current_user.isAdmin %>
+        <th>Admin approval</th>
+        <% end %>
+        <% if !current_user.isAdmin %>
+        <th>Status</th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.categories.first ? post.categories.first.title : nil %></td>
+        <td><%= post.title %></td>
+        <td><%= post.content %></td>
+        <td><%= image_tag(post.images || "https://via.placeholder.com/150", size: "150x150") %></td>
+        <td><%= post.love %></td>
+        <td><%= post.share %></td>
+        <td><%= post.user_id %></td>
+        <td><%= link_to 'Show', post %></td>
+        <td>
+          <% if current_user.id == post.user_id %>
+          <%= link_to 'Edit', edit_post_path(post) %>
+          <% end %>
+        </td>
+        <% if current_user.isAdmin %>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+        <td></td>
+        <% end %>
+        <% if current_user.isAdmin %>
+        <td>
+          <% if post.status == "awaiting_approval" %>
+          <div id="action-validate">
+            <%= link_to "Approve",approve_posts_path(post), :remote=>true, :method=>"POST",:class=>"btn btn-success"%>
+            <%= link_to "Disapprove",disapprove_posts_path(post), :remote=>true, :method=>"POST",:class=>"btn btn-danger"%>
+          </div>
+          <% end %>
+          <% if post.status == "approval" %>
+          <span class='badge badge-success'>Approval</span>
+          <% end %>
+          <% if post.status == "disapproval" %>
+          <span class='badge badge-danger'>Disapproval</span>
+          <% end %>
+        </td>
+        <% end %>
+        <% if !current_user.isAdmin %>
+        <td>
+          <% if post.status == "approval" %>
+          <span class='badge badge-success'>Approval</span>
+          <% end %>
+          <% if post.status == "disapproval" %>
+          <span class='badge badge-danger'>Disapproval</span>
+          <% end %>
+          <% if post.status == "awaiting_approval" %>
+          <span class='badge badge-warning'>Waiting approval</span>
+          <% end %>
+        </td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<% if current_user %>
+<%= link_to 'New Post', new_post_path %>
+<% end %>

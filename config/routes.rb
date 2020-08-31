@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   
+  resources :posts
+  resources :categories
+  post '/posts/approve/:id' => 'posts#approve', as: :approve_posts
+  post '/posts/disapprove/:id' => 'posts#disapprove', as: :disapprove_posts
   root to: 'homes#index'
   get 'users/edit'
-  patch 'users/update'
+  post 'users/update'
 
   devise_for :users
   # controllers: {

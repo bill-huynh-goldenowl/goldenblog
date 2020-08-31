@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dkepvw2rz
+  api_key: '845495584447459'
+  api_secret: GrMmP8c5zJdbdneZ7vYbHLC9NRE
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: dkepvw2rz
+  api_key: '845495584447459'
+  api_secret: GrMmP8c5zJdbdneZ7vYbHLC9NRE
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: dkepvw2rz
+  api_key: '845495584447459'
+  api_secret: GrMmP8c5zJdbdneZ7vYbHLC9NRE
+  enhance_image_tag: true
+  static_file_support: false
