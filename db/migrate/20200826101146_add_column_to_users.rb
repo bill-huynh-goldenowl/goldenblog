@@ -7,7 +7,7 @@ class AddColumnToUsers < ActiveRecord::Migration[6.0]
     add_column :users, :provider, :string
     add_column :users, :uid, :string
     add_column :users, :image, :string
-    add_column :users, :isAdmin, :boolean
+    add_column :users, :is_admin, :boolean
     add_column :users, :fullname, :string
   end
 end
