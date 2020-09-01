@@ -1,0 +1,19 @@
+<div class="container" style="padding: 20px; background: #f1f1f1;">
+  <table>
+    <thead>
+      <th>Email</th>
+      <th>Admin</th>
+      <th colspan="2">Action</th>
+    <thead>
+    <tbody>
+      <% @users.each do |u| %>
+        <tr>
+          <td><%= u.email %></td>
+          <td><%= u.isAdmin %></td>
+          <td><%= link_to  "Update", edit_password_path(u) %></td>
+          <td><%= link_to "Block", "", class: "badge badge-danger" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>
+</div>
