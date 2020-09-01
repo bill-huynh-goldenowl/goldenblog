@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[:edit_password, :update, :update_pwd,:destroy]
+  before_action :set_user, only: %i[edit_password update update_pwd destroy]
   before_action :authenticate_user!
 
   def index

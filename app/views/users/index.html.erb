@@ -9,7 +9,7 @@
       <% @users.each do |u| %>
         <tr>
           <td><%= u.email %></td>
-          <td><%= u.isAdmin %></td>
+          <td><%= u.is_admin %></td>
           <td><%= link_to  "Update", edit_password_path(u) %></td>
           <td><%= link_to "Block", "", class: "badge badge-danger" %></td>
         </tr>

@@ -12,7 +12,7 @@
 
 <%= link_to  "Post", posts_path %>
 
-<% if current_user.isAdmin %>
+<% if current_user.is_admin %>
   <%= link_to  "Categories", categories_path %>
   <%= link_to "Users list", users_index_path %>
 <% end %>

@@ -1,13 +1,13 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[:show, :edit, :update, :destroy]
+  before_action :set_post, only: %i[show edit update destroy approve disapprove]
   before_action :authenticate_user!
   # GET /posts
   # GET /posts.json
   def index
-    if current_user.isAdmin
+    if current_user.is_admin
       @posts = Post.all
     else
-      @posts = current_user.posts.all
+      @posts = current_user.posts
     end
   end
 
@@ -86,7 +86,6 @@ class PostsController < ApplicationController
   end
 
   def approve
-    @post = Post.find(params[:id])
     @post.update_attributes(status: 1)
     respond_to do |format|
       format.js
@@ -94,7 +93,6 @@ class PostsController < ApplicationController
   end
 
   def disapprove
-    @post = Post.find(params[:id])
     @post.update_attributes(status: 2)
   end
 
