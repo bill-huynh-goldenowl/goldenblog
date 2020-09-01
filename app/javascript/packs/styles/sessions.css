@@ -85,3 +85,8 @@ color: white;
 .links a{
 margin-left: 4px;
 } 
+
+table, th, td{
+  border: 1px solid black;
+  padding: 20px;
+}
