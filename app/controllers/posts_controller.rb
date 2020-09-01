@@ -25,32 +25,24 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     @categories = Category.all
+    @post
   end
 
   # POST /posts
   # POST /posts.json
   def create
+    #validate ajax if images nil?
     if post_params[:images].blank?
-      flash[:error] = "Please, choose image"
+      @errors = "Images source not blank.Please choose image before update"
       return
     end
 
     @url_image = convert_to_url_cloudinary(post_params[:images].original_filename)
 
-    if @url_image.blank?
-      flash[:error] = "Error, 500!"
-      return
-    end
-    
-    if current_user
-      @user =  User.find(current_user.id)
-    end
-
-    @post = @user.posts.new(post_params.merge(images: @url_image))
-    # get specific category
     @category = Category.find(params[:category_id])
-    # add post to category
-    @category.posts << @post
+
+    @post = @category.posts.new(post_params.merge(images: @url_image, user_id: current_user.id))
+
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -65,16 +57,15 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-
-    @url_image = convert_to_url_cloudinary(post_params[:images].original_filename)
-
-    if @url_image.blank?
-      flash[:error] = "Error, 500!"
-      return
+    @url_image = nil
+    if post_params[:images].blank?
+      @url_image = Post.find(params[:id])[:images]
+    else
+      @url_image = convert_to_url_cloudinary(post_params[:images].original_filename)
     end
 
     respond_to do |format|
-      if @post.update(post_params)
+      if @post.update(post_params.merge(images: @url_image))
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
@@ -108,18 +99,18 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.require(:post).permit(:title, :content, :images)
-    end
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params.require(:post).permit(:title, :content, :images)
+  end
 
-    # Convert format with cloudinary
-    def convert_to_url_cloudinary(path_image)
-      Cloudinary::Uploader.upload(Rails.root.join("uploads", path_image).to_s, :tags => "lanscape_stories")['url'] 
-    end
+  # Convert format with cloudinary
+  def convert_to_url_cloudinary(path_image)
+    Cloudinary::Uploader.upload(Rails.root.join("uploads", path_image).to_s, :tags => "lanscape_stories")['url'] 
+  end
 end

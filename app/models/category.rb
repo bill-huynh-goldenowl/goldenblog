@@ -1,3 +1,6 @@
 class Category < ApplicationRecord
-  has_and_belongs_to_many :posts, dependent: :nullify
+  has_many :posts, dependent: :destroy
+
+  validates :title, presence: true, length: {minimum: 6, maximum: 30}
+  validates :description, length: {minimum: 30, maximum: 100}
 end

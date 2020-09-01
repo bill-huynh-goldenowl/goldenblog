@@ -26,7 +26,7 @@ padding: 20px;">
     <tbody>
       <% @posts.each do |post| %>
       <tr>
-        <td><%= post.categories.first ? post.categories.first.title : nil %></td>
+        <td><%= post.category.title %></td>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
         <td><%= image_tag(post.images || "https://via.placeholder.com/150", size: "150x150") %></td>

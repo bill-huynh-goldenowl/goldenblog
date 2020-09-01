@@ -1,6 +1,42 @@
 <h1>Editing Post</h1>
 
-<%= render 'form', post: @post %>
+<div class="container-fluid" style="background: #f1f1f1;
+padding: 20px;
+border-radius: 25px;">
+<div id="errors"></div>
+  <%= form_with(model: @post, local: true) do |form| %>
+  <div class="field">
+    <%= form.label(:post_category, 'Select category')%>
+    <%= select_tag(:category_id, options_for_select([["Choosing...", 0],*@categories.map { |category| [category.title, category.id] }],@post.id.nil? ? 0 : @post.category.id)) %>
+  </div>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.cktext_area :content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :images %>
+    <%= form.file_field :images, id: 'input-image-file', accept: 'image/*' %>
+  </div>
+
+  <div class="imagePreview" id="imagePreview">
+    <img src=<%= @post.images %> alt='Image preview' class='imagePreview__image' style="display: block">
+    <span class="imagePreview__defaultText" style="display: none;">Image Preview</span>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+  <% end %>
+</div>
+
 
 <%= link_to 'Show', @post %> |
 <%= link_to 'Back', posts_path %>
+
+<%= javascript_pack_tag "preview" %>

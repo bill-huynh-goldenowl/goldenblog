@@ -1,21 +1,11 @@
 <div class="container-fluid" style="background: #f1f1f1;
 padding: 20px;
 border-radius: 25px;">
+<div id="errors"></div>
   <%= form_with(model: post, local: true) do |form| %>
-  <% if post.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-    <ul>
-      <% post.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-  <% end %>
   <div class="field">
     <%= form.label(:post_category, 'Select category')%>
-    <%= select_tag(:category_id, options_for_select([["Choosing...", 0],*@categories.map { |category| [category.title, category.id] }],@post ? (@post.categories.first ? @post.categories.first.id : 0) : 0)) %>
+    <%= select_tag(:category_id, options_for_select([["Choosing...", 0],*@categories.map { |category| [category.title, category.id] }],@post.id.nil? ? 0 : @post.category.id)) %>
   </div>
   <div class="field">
     <%= form.label :title %>

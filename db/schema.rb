@@ -22,23 +22,18 @@ ActiveRecord::Schema.define(version: 2020_08_31_031311) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "categories_posts", force: :cascade do |t|
-    t.bigint "category_id"
-    t.bigint "post_id"
-    t.index ["category_id"], name: "index_categories_posts_on_category_id"
-    t.index ["post_id"], name: "index_categories_posts_on_post_id"
-  end
-
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.string "images", default: "https://via.placeholder.com/150"
     t.integer "love"
     t.integer "share"
+    t.bigint "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.integer "status", default: 0
+    t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -63,5 +58,6 @@ ActiveRecord::Schema.define(version: 2020_08_31_031311) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
 end

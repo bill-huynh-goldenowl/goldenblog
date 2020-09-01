@@ -1,7 +1,7 @@
 <div class="container" style="padding: 20px 0;">
   <h1 style="color: #f1f1f1; text-align: center;">Profile</h1>
   <% flash.each do |type, msg| %>
-  <div style="color: green">
+  <div style="color: red">
     <%= msg %>
   </div>
   <% end %>
@@ -33,7 +33,7 @@
   </div>
 
   <div class="actions">
-    <%= form.submit(class: "btn btn-primary") %>
+    <%= submit(class: "btn btn-primary") %>
   </div>
   <% end %>
 </div>

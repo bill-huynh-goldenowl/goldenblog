@@ -6,6 +6,7 @@ class CreatePosts < ActiveRecord::Migration[6.0]
       t.string :images, default: "https://via.placeholder.com/150"
       t.integer :love
       t.integer :share
+      t.references :category, foreign_key: true
       t.timestamps
     end
   end
