@@ -85,14 +85,14 @@ class PostsController < ApplicationController
   end
 
   def approve
-    @post.update_attributes(status: 1)
+    @post.update_attributes(status: :approval)
     respond_to do |format|
       format.js
     end
   end
 
   def disapprove
-    @post.update_attributes(status: 2)
+    @post.update_attributes(status: :disapproval)
   end
 
   private
