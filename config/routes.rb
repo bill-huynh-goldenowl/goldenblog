@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   get 'users/edit_password/:id' => 'users#edit_password', as: :edit_password
   post 'users/update_pwd/:id' => 'users#update_pwd', as: :update_pwd
   
-  post 'users/update'
   patch 'users/update/:id' => 'users#update', as: :update
 
   devise_for :users
