@@ -1,0 +1,13 @@
+<div class="border-left border-bottom border-top p-4 mb-4">
+  <%= comment.user.email %> posted
+  <%= simple_format comment.body %>
+
+  <div data-controller="reply">
+    <%= link_to "Reply", "#", data: {action: "click->reply#show"} %>
+  
+    <%= render partial: "comments/form", locals: {commentable: comment.commentable, parent_id:comment.id, class:"d-none", target: "reply.form"} %>
+
+  </div>
+
+  <%= render comment.comments %>
+</div>
