@@ -29,6 +29,10 @@ padding: 15px;">
       <li><i class="fab fa-facebook" style="font-size: 25px;"></i></li>
     </ul>
   </div>
+
+  <h3>Comments</h3>
+
+  <%= render @post.comments.where(parent_id: nil) %>
 </div>
 
 <% if current_user && current_user.id == @post.user_id %>

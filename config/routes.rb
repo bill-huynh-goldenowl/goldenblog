@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   
-  resources :posts
+  resources :posts do
+    resources :comments, module: :posts
+  end
+
+  # resources :discussion do
+  #   resources :comments, module: :discussion
+  # end
+
   resources :categories
   post '/posts/approve/:id' => 'posts#approve', as: :approve_posts
   post '/posts/disapprove/:id' => 'posts#disapprove', as: :disapprove_posts
