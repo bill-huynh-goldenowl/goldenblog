@@ -25,7 +25,6 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     @categories = Category.all
-    @post
   end
 
   # POST /posts

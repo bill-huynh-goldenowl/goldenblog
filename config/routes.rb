@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   post 'users/update_pwd/:id' => 'users#update_pwd', as: :update_pwd
   
   post 'users/update'
-  patch 'users/update'
+  patch 'users/update/:id' => 'users#update', as: :update
 
   devise_for :users
   # controllers: {
