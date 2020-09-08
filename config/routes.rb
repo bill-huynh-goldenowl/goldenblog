@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   resources :posts
   resources :categories
   resources :posts do
-    post :approve
-    post :disapprove
+    member do 
+      post :approve
+      post :disapprove
+    end
   end
 
   get 'users/index'
