@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[show edit update destroy approve disapprove]
   before_action :authenticate_user!
   # GET /posts
   # GET /posts.json
@@ -85,18 +85,11 @@ class PostsController < ApplicationController
   end
 
   def approve
-    @post = Post.find(params[:post_id])
-
-    @post.update_attributes(status: :approval)
-    respond_to do |format|
-      format.js
-    end
+    @post.approval!
   end
 
   def disapprove
-    @post = Post.find(params[:post_id])
-
-    @post.update_attributes(status: :disapproval)
+    @post.disapproval!
   end
 
   private

@@ -47,8 +47,8 @@
         <td>
           <% if post.status == "awaiting_approval" %>
           <div id="action-validate">
-            <%= link_to "Approve", post_approve_path(post), :remote=>true, :method=>"POST",:class=>"btn btn-success" %>
-            <%= link_to "Disapprove",post_disapprove_path(post), :remote=>true, :method=>"POST",:class=>"btn btn-danger"%>
+            <%= link_to "Approve", approve_post_path(post), :remote=>true, :method=>"POST",:class=>"btn btn-success" %>
+            <%= link_to "Disapprove",disapprove_post_path(post), :remote=>true, :method=>"POST",:class=>"btn btn-danger"%>
           </div>
           <% end %>
           <% if post.status == "approval" %>
