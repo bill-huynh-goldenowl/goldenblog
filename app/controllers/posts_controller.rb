@@ -4,10 +4,11 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    @posts =
     if current_user.is_admin
-      @posts = Post.all
+      Post.all
     else
-      @posts = current_user.posts
+      current_user.posts
     end
   end
 
@@ -56,11 +57,11 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    @url_image = nil
+    @url_image = 
     if post_params[:images].blank?
-      @url_image = Post.find(params[:id])[:images]
+      Post.find(params[:id])[:images]
     else
-      @url_image = convert_to_url_cloudinary(post_params[:images].original_filename)
+      convert_to_url_cloudinary(post_params[:images].original_filename)
     end
 
     respond_to do |format|
@@ -85,14 +86,11 @@ class PostsController < ApplicationController
   end
 
   def approve
-    @post.update_attributes(status: :approval)
-    respond_to do |format|
-      format.js
-    end
+    @post.approval!
   end
 
   def disapprove
-    @post.update_attributes(status: :disapproval)
+    @post.disapproval!
   end
 
   private

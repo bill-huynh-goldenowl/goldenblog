@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
+  root to: 'homes#index'
   
   resources :posts do
+    member do 
+      post :approve
+      post :disapprove
+    end
     resources :comments, module: :posts
   end
 
@@ -9,9 +14,7 @@ Rails.application.routes.draw do
   # end
 
   resources :categories
-  post '/posts/approve/:id' => 'posts#approve', as: :approve_posts
-  post '/posts/disapprove/:id' => 'posts#disapprove', as: :disapprove_posts
-  root to: 'homes#index'
+
   get 'users/index'
   get 'users/show'
   get 'users/edit'
