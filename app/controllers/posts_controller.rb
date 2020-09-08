@@ -32,12 +32,14 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     #validate ajax if images nil?
+    @url_image = 
     if post_params[:images].blank?
-      @errors = "Images source not blank.Please choose image before update"
-      return
+      "https://via.placeholder.com/150"
+    else
+      convert_to_url_cloudinary(post_params[:images].original_filename)
     end
 
-    @url_image = convert_to_url_cloudinary(post_params[:images].original_filename)
+  # @url_image = convert_to_url_cloudinary(post_params[:images].original_filename)
 
     @category = Category.find(params[:category_id])
 
@@ -48,6 +50,8 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
+        @categories = Category.all
+
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
