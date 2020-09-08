@@ -1,0 +1,48 @@
+<div class="container">
+  <header class="title" style="text-align: center;color: #fff;font-size: 2em;">Profile</header>
+  <section>
+    <div class="form-group">
+      <label for="..." style="color: #fff;">First name</label>
+      <div class="first-name" style="border-radius: 25px; background: #f1f1f1; padding: 5px 15px;">
+        <%= current_user.first_name %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="..." style="color: #fff;">Last name</label>
+      <div class="last-name" style="border-radius: 25px; background: #f1f1f1; padding: 5px 15px;">
+        <%= current_user.last_name %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="..." style="color: #fff;">Full name</label>
+      <div class="full-name" style="border-radius: 25px; background: #f1f1f1; padding: 5px 15px;">
+        <%= current_user.fullname %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="..." style="color: #fff;">Email</label>
+      <div class="email" style="border-radius: 25px; background: #f1f1f1; padding: 5px 15px;">
+        <%= current_user.email %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="..." style="color: #fff;">Phone</label>
+      <div class="phone" style="border-radius: 25px; background: #f1f1f1; padding: 5px 15px;">
+        <%= current_user.phone %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="..." style="color: #fff;">Location</label>
+      <div class="location" style="border-radius: 25px; background: #f1f1f1; padding: 5px 15px;">
+        <%= current_user.location %>
+      </div>
+    </div>
+  </section>
+  <%= link_to  "Edit", users_edit_path %>
+  <%= link_to "Back", root_path %>
+</div>

@@ -38,6 +38,14 @@ gem 'hirb'
 
 gem 'dotenv-rails'
 
+gem 'cloudinary'
+
+gem 'ckeditor'
+
+gem "font-awesome-rails"
+
+gem 'rubocop-rails', require: false
+
 gem 'jquery-rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

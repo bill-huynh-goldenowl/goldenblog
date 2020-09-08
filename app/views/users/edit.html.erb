@@ -1,11 +1,11 @@
 <div class="container" style="padding: 20px 0;">
   <h1 style="color: #f1f1f1; text-align: center;">Profile</h1>
   <% flash.each do |type, msg| %>
-  <div style="color: green">
+  <div style="color: red">
     <%= msg %>
   </div>
   <% end %>
-  <%= form_with model: @user, url:"/users/update" do |form| %>
+  <%= form_with model: @user, url:update_path(@user.id) do |form| %>
 
   <div class="form-group" style="color: #f1f1f1">
     <%= form.label :first_name %>
@@ -17,7 +17,7 @@
     <%= form.text_field(:last_name, class: "form-control") %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" style="color: #f1f1f1">
     <%= form.label :fullname %>
     <%= form.text_field(:fullname, class: "form-control") %>
   </div>
@@ -33,7 +33,7 @@
   </div>
 
   <div class="actions">
-    <%= form.submit(class: "btn btn-primary") %>
+    <%= form.submit "Update", class: "btn btn-primary" %>
   </div>
   <% end %>
 </div>
