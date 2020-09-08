@@ -15,10 +15,10 @@ padding: 20px;">
         <th>User</th>
         <th colspan="3">Action</th>
         <% if current_user.is_admin %>
-        <th>Admin approval</th>
+          <th>Admin approval</th>
         <% end %>
         <% if !current_user.is_admin %>
-        <th>Status</th>
+          <th>Status</th>
         <% end %>
       </tr>
     </thead>
@@ -36,42 +36,42 @@ padding: 20px;">
         <td><%= link_to 'Show', post %></td>
         <td>
           <% if current_user.id == post.user_id %>
-          <%= link_to 'Edit', edit_post_path(post) %>
+            <%= link_to 'Edit', edit_post_path(post) %>
           <% end %>
         </td>
         <% if current_user.is_admin %>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% else %>
-        <td></td>
+          <td></td>
         <% end %>
         <% if current_user.is_admin %>
-        <td>
-          <% if post.status == "awaiting_approval" %>
-          <div id="action-validate">
-            <%= link_to "Approve",approve_post_path(post), :remote=>true, :method=>"POST",:class=>"btn btn-success"%>
-            <%= link_to "Disapprove",disapprove_post_path(post), :remote=>true, :method=>"POST",:class=>"btn btn-danger"%>
-          </div>
-          <% end %>
-          <% if post.status == "approval" %>
-          <span class='badge badge-success'>Approval</span>
-          <% end %>
-          <% if post.status == "disapproval" %>
-          <span class='badge badge-danger'>Disapproval</span>
-          <% end %>
-        </td>
+          <td>
+            <% if post.status == "awaiting_approval" %>
+              <div id="action-validate">
+                <%= link_to "Approve",approve_post_path(post), :remote=>true, :method=>"POST",:class=>"btn btn-success"%>
+                <%= link_to "Disapprove",disapprove_post_path(post), :remote=>true, :method=>"POST",:class=>"btn btn-danger"%>
+              </div>
+            <% end %>
+            <% if post.status == "approval" %>
+              <span class='badge badge-success'>Approval</span>
+            <% end %>
+            <% if post.status == "disapproval" %>
+              <span class='badge badge-danger'>Disapproval</span>
+            <% end %>
+          </td>
         <% end %>
         <% if !current_user.is_admin %>
-        <td>
-          <% if post.status == "approval" %>
-          <span class='badge badge-success'>Approval</span>
-          <% end %>
-          <% if post.status == "disapproval" %>
-          <span class='badge badge-danger'>Disapproval</span>
-          <% end %>
-          <% if post.status == "awaiting_approval" %>
-          <span class='badge badge-warning'>Waiting approval</span>
-          <% end %>
-        </td>
+          <td>
+            <% if post.status == "approval" %>
+              <span class='badge badge-success'>Approval</span>
+            <% end %>
+            <% if post.status == "disapproval" %>
+              <span class='badge badge-danger'>Disapproval</span>
+            <% end %>
+            <% if post.status == "awaiting_approval" %>
+              <span class='badge badge-warning'>Waiting approval</span>
+            <% end %>
+          </td>
         <% end %>
       </tr>
       <% end %>
