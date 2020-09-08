@@ -4,11 +4,12 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    if current_user.is_admin
-      @posts = Post.all
-    else
-      @posts = current_user.posts
-    end
+    @post = 
+      if current_user.is_admin
+        Post.all
+      else
+        current_user.posts
+      end
   end
 
   # GET /posts/1
@@ -56,12 +57,12 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    @url_image = nil
-    if post_params[:images].blank?
-      @url_image = Post.find(params[:id])[:images]
-    else
-      @url_image = convert_to_url_cloudinary(post_params[:images].original_filename)
-    end
+    @url_image =
+      if post_params[:images].blank?
+        Post.find(params[:id])[:images]
+      else
+        convert_to_url_cloudinary(post_params[:images].original_filename)
+      end
 
     respond_to do |format|
       if @post.update(post_params.merge(images: @url_image))
