@@ -4,11 +4,11 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts =
+    @pagy, @posts =
     if current_user.is_admin
-      Post.all
+      pagy(Post.all)
     else
-      current_user.posts
+      pagy(current_user.posts)
     end
   end
 

@@ -16,14 +16,14 @@
   <%= link_to  "Categories", categories_path %>
   <%= link_to "Users list", users_index_path %>
 <% end %>
-<div class="container-fluid" style="display: flex;">
+<div class="container-fluid" style="display: flex; flex-wrap: wrap">
   <% if @posts.length > 0 %>
     <% @posts.each do |post| %>
       <div class="card" style="width: 18rem; background: #f1f1f1 !important; margin: 15px">
       <img class="card-img-top" src=<%= post.images %> alt="Card image cap" width="150" height="150">
       <div class="card-body">
         <h5 class="card-title"><%= post.title %></h5>
-        <p class="card-text"><%= post.content.length > 50 ? post.content.slice(0, 50).concat("...") : post.content %></p>
+        <p class="card-text"><%== post.content.length > 50 ? post.content.slice(0, 50).concat("...") : post.content %></p>
         <%= link_to  "Detail", "/posts/#{post.id}", class: "btn btn-primary" %>
       </div>
     </div>

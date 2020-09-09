@@ -24,3 +24,4 @@ inputImageFile.addEventListener('change', function () {
     previewImage.setAttribute("src", "");
   }
 })
+
