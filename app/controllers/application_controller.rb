@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
   private
 
   # Overwriting the sign_out redirect path method
