@@ -6,9 +6,9 @@ class PostsController < ApplicationController
   def index
     @pagy, @posts =
     if current_user.is_admin
-      pagy(Post.all)
+      pagy(Post.all, items:5)
     else
-      pagy(current_user.posts)
+      pagy(current_user.posts, items: 5)
     end
   end
 
@@ -38,8 +38,6 @@ class PostsController < ApplicationController
     else
       convert_to_url_cloudinary(post_params[:images].original_filename)
     end
-
-  # @url_image = convert_to_url_cloudinary(post_params[:images].original_filename)
 
     @category = Category.find(params[:category_id])
 
