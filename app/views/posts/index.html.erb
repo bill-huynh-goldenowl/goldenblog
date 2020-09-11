@@ -6,6 +6,7 @@ padding: 20px;">
   <table style="margin:0 auto">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Category</th>
         <th>Title</th>
         <th>Content</th>
@@ -26,6 +27,7 @@ padding: 20px;">
     <tbody>
       <% @posts.each do |post| %>
       <tr>
+        <td><%= post.id %></td>
         <td><%= post.category.title %></td>
         <td><%= post.title %></td>
         <td><%= post.content.length > 10 ? post.content.slice(0, 10)+'...' : post.content %></td>
@@ -47,7 +49,7 @@ padding: 20px;">
         <% if current_user.is_admin %>
           <td>
             <% if post.status == "awaiting_approval" %>
-              <div id="action-validate">
+              <div id="action-validate-<%= post.id %>">
                 <%= link_to "Approve",approve_post_path(post), :remote=>true, :method=>"POST",:class=>"btn btn-success"%>
                 <%= link_to "Disapprove",disapprove_post_path(post), :remote=>true, :method=>"POST",:class=>"btn btn-danger"%>
               </div>

@@ -91,6 +91,7 @@ class PostsController < ApplicationController
 
   def approve
     @post.approval!
+    @post
   end
 
   def disapprove

@@ -1,2 +1,1 @@
-const divValidate = document.getElementById('action-validate')
-divValidate.innerHTML = "<span class='badge badge-danger'>Disapproval</span>"
+document.getElementById(`action-validate-${<%= @post.id %>}`).innerHTML = "<span class='badge badge-danger'>Disapproval</span>"
