@@ -1,13 +1,34 @@
-<div class="border-left border-bottom border-top p-4 mb-4">
-  <%= comment.user.email %> posted
-  <%= simple_format comment.body %>
+<% nesting     = local_assigns.fetch(:nesting, 1) %>
+<% max_nesting = local_assigns[:max_nesting] %>
+<% continue_thread = local_assigns[:continue_thread] %>
+
+<%= tag.div id: dom_id(comment), class: "border-left pl-4 mt-4" do %>
+  <% if !comment.deleted? %>
+    <strong><%= comment.user.email %></strong> <%= link_to "posted", url_for(comment: comment.id, anchor: dom_id(comment)) %>
+    <%= simple_format comment.body %>
+  <% end %>
 
   <div data-controller="reply">
-    <%= link_to "Reply", "#", data: {action: "click->reply#show"} %>
-  
-    <%= render partial: "comments/form", locals: {commentable: comment.commentable, parent_id:comment.id, class:"d-none", target: "reply.form"} %>
+    <small>
+      <% if !comment.deleted? %>
+        <%= link_to "Reply", "#", data: { action: "click->reply#toggle" } %>
+      <% end %>
+      <%= link_to "Delete", [comment.commentable, comment], method: :delete, data: {confirm: "Are you sure?"} if comment.user == current_user %>
+    </small>
 
+    <%= render partial: "comments/form", locals: {
+      commentable: comment.commentable,
+      parent_id: reply_to_comment_id(comment, nesting, max_nesting),
+      class: "mt-4 d-none",
+      target: "reply.form"
+    } %>
   </div>
 
-  <%= render comment.comments %>
-</div>
+  <%= tag.div id: "#{dom_id(comment)}_comments" do %>
+    <% if continue_thread.present? && nesting >= continue_thread && comment.comments.any? %>
+      <%= link_to "Continue this thread", url_for(comment: comment.id, anchor: dom_id(comment)) %>
+    <% else %>
+      <%= render comment.comments, continue_thread: continue_thread, nesting: nesting + 1, max_nesting: local_assigns[:max_nesting] %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -9,10 +9,6 @@ Rails.application.routes.draw do
     resources :comments, module: :posts
   end
 
-  # resources :discussion do
-  #   resources :comments, module: :discussion
-  # end
-
   resources :categories
 
   get 'users/index'

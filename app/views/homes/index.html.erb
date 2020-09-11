@@ -16,7 +16,7 @@
   <%= link_to  "Categories", categories_path %>
   <%= link_to "Users list", users_index_path %>
 <% end %>
-<div class="container-fluid" style="display: flex;">
+<div class="container-fluid" style="display: flex; flex-wrap: wrap;">
   <% if @posts.length > 0 %>
     <% @posts.each do |post| %>
       <div class="card" style="width: 18rem; background: #f1f1f1 !important; margin: 15px">
