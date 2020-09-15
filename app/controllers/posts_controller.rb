@@ -94,6 +94,8 @@ class PostsController < ApplicationController
 
   def like
     @post = Post.find(params[:id])
+    @format = params[:format]
+    
     if params[:format] == 'like'
       @post.liked_by current_user
     elsif params[:format] == 'unlike'

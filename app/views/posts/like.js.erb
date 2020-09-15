@@ -1,11 +1,19 @@
 $('.preached-btn').on('ajax:success', function(){
     $(this).parent().parent().find('.like_count')
     .html('<%= @post.get_likes.size %> &#128591');
-    $(this).closest('.preached-btn').html('Preach');
+    $(this).closest('.preached-btn').html('Like');
 });
 
 $('.preached-btn').on('ajax:success', function(){
     $(this).parent().parent().find('.like_count')
     .html('<%= @post.get_likes.size %> &#128591');
-    $(this).closest('.preached-btn').html('Preach');
-})
+    $(this).closest('.preached-btn').html('Like');
+});
+
+$('.like_count_<%= @post.id %>').html('<%= @post.get_likes.size %> &#128591')
+
+<% if @format == 'unlike' %>
+    $('.react-post-<%= @post.id %>').html('<a class="preached-btn" data-remote="true" rel="nofollow" data-method="put" href="/posts/<%= @post.id %>/like.like">Like</a>')
+<% else %>
+    $('.react-post-<%= @post.id %>').html('<a class="preached-btn" data-remote="true" rel="nofollow" data-method="put" href="/posts/<%= @post.id %>/like.unlike">Unlike</a>')
+<% end %>

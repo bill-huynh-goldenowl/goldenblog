@@ -26,21 +26,20 @@
         <p class="card-text"><%= post.content.length > 50 ? post.content.slice(0, 50).concat("...") : post.content %></p>
         <%= link_to  "Detail", "/posts/#{post.id}", class: "btn btn-primary" %>
         <span class='parent-likes'>
-          <span class='like_count' <%= post.id %>>
+          <span class='like_count_<%= post.id %>' >
             <%= post.get_likes.size %> &#128591
           </span>
-
-          <a>
+          <div class="react-post-<%= post.id %>">
             <% if current_user.liked? post %>
               <div> 
-                <%= link_to 'Preached', like_post_path(post, 'unlike'), class: 'preached-btn', method: :put, remote: :true  %>  
+                <%= link_to 'Unlike', like_post_path(post, 'unlike'), class: 'preached-btn', method: :put, remote: :true  %>  
               </div>
             <% else %>
               <div>
-                <%= link_to 'Preached', like_post_path(post, 'like'), class: 'preached-btn', method: :put, remote: :true %> 
+                <%= link_to 'Like', like_post_path(post, 'like'), class: 'preached-btn', method: :put, remote: :true %> 
               </div>
             <% end %>
-          </a>
+          </div>
         </span>
       </div>
     </div>
