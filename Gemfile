@@ -47,6 +47,9 @@ gem "font-awesome-rails"
 gem 'rubocop-rails', require: false
 
 gem 'jquery-rails'
+
+gem 'acts_as_votable'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
