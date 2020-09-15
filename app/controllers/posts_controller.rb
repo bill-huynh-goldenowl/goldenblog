@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[show edit update destroy approve disapprove]
+  before_action :set_post, only: %i[show edit update destroy approve reject]
   before_action :authenticate_user!
   # GET /posts
   # GET /posts.json
@@ -95,7 +95,7 @@ class PostsController < ApplicationController
     @post
   end
 
-  def disapprove
+  def reject
     @post.disapproval!
   end
 

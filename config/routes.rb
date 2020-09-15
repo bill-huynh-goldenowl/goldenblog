@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :posts do
     member do 
       post :approve
-      post :disapprove
+      post :reject
     end
     resources :comments, module: :posts
   end
