@@ -25,6 +25,23 @@
         <h5 class="card-title"><%= post.title %></h5>
         <p class="card-text"><%= post.content.length > 50 ? post.content.slice(0, 50).concat("...") : post.content %></p>
         <%= link_to  "Detail", "/posts/#{post.id}", class: "btn btn-primary" %>
+        <span class='parent-likes'>
+          <span class='like_count' <%= post.id %>>
+            <%= post.get_likes.size %> &#128591
+          </span>
+
+          <a>
+            <% if current_user.liked? post %>
+              <div> 
+                <%= link_to 'Preached', like_post_path(post, 'unlike'), class: 'preached-btn', method: :put, remote: :true  %>  
+              </div>
+            <% else %>
+              <div>
+                <%= link_to 'Preached', like_post_path(post, 'like'), class: 'preached-btn', method: :put, remote: :true %> 
+              </div>
+            <% end %>
+          </a>
+        </span>
       </div>
     </div>
     <% end %>

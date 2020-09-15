@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy approve disapprove]
   before_action :authenticate_user!
+
+  respond_to :js, :html, :json
   # GET /posts
   # GET /posts.json
   def index
@@ -87,6 +89,15 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def like
+    @post = Post.find(params[:id])
+    if params[:format] == 'like'
+      @post.liked_by current_user
+    elsif params[:format] == 'unlike'
+      @post.unliked_by current_user
     end
   end
 

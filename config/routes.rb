@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     member do 
       post :approve
       post :disapprove
+      put :like
     end
     resources :comments, module: :posts
   end
