@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @post = 
+    @posts = 
       if current_user.is_admin
         Post.all
       else
