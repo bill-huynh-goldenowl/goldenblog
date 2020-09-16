@@ -44,7 +44,7 @@ gem 'ckeditor'
 
 gem "font-awesome-rails"
 
-gem 'rubocop-rails', require: false
+gem 'rubocop-rails', require: true
 
 gem 'jquery-rails'
 group :development, :test do

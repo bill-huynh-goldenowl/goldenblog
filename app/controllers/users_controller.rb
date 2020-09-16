@@ -14,16 +14,15 @@ class UsersController < ApplicationController
     @user = current_user
     render :edit
   end
-  
-  def edit_password
-  end
+
+  def edit_password; end
 
   def update
     if current_user.update(user_params)
-      flash[:success] = "Update profile successful!"
+      flash[:success] = 'Update profile successful!'
       redirect_to root_path
     else
-      flash[:error] = "Update profile failure!"
+      flash[:error] = 'Update profile failure!'
       render :edit
     end
   end
@@ -33,8 +32,8 @@ class UsersController < ApplicationController
     redirect_to users_index_path
   end
 
-
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])

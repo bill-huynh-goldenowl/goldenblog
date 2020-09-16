@@ -4,7 +4,10 @@
 
 <%= tag.div id: dom_id(comment), class: "border-left pl-4 mt-4" do %>
   <% if !comment.deleted? %>
-    <strong><%= comment.user.email %></strong> <%= link_to "posted", url_for(comment: comment.id, anchor: dom_id(comment)) %>
+    <strong>
+      <%= comment.user.email %>
+    </strong>
+    <%= link_to "posted", url_for(comment: comment.id, anchor: dom_id(comment)) %>
     <%= simple_format comment.body %>
   <% end %>
 

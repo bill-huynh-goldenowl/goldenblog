@@ -5,11 +5,11 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts =
-    if current_user.is_admin
-      Post.all
-    else
-      current_user.posts
-    end
+      if current_user.is_admin
+        Post.all
+      else
+        current_user.posts
+      end
   end
 
   # GET /posts/1
@@ -32,15 +32,15 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    #validate ajax if images nil?
-    @url_image = 
-    if post_params[:images].blank?
-      "https://via.placeholder.com/150"
-    else
-      convert_to_url_cloudinary(post_params[:images].original_filename)
-    end
+    # validate ajax if images nil?
+    @url_image =
+      if post_params[:images].blank?
+        'https://via.placeholder.com/150'
+      else
+        convert_to_url_cloudinary(post_params[:images].original_filename)
+      end
 
-  # @url_image = convert_to_url_cloudinary(post_params[:images].original_filename)
+    # @url_image = convert_to_url_cloudinary(post_params[:images].original_filename)
 
     @category = Category.find(params[:category_id])
 
@@ -62,12 +62,12 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    @url_image = 
-    if post_params[:images].blank?
-      Post.find(params[:id])[:images]
-    else
-      convert_to_url_cloudinary(post_params[:images].original_filename)
-    end
+    @url_image =
+      if post_params[:images].blank?
+        Post.find(params[:id])[:images]
+      else
+        convert_to_url_cloudinary(post_params[:images].original_filename)
+      end
 
     respond_to do |format|
       if @post.update(post_params.merge(images: @url_image))
@@ -100,6 +100,7 @@ class PostsController < ApplicationController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
@@ -112,6 +113,6 @@ class PostsController < ApplicationController
 
   # Convert format with cloudinary
   def convert_to_url_cloudinary(path_image)
-    Cloudinary::Uploader.upload(Rails.root.join("uploads", path_image).to_s, :tags => "lanscape_stories")['url'] 
+    Cloudinary::Uploader.upload(Rails.root.join('uploads', path_image).to_s, tags: 'lanscape_stories')['url']
   end
 end
